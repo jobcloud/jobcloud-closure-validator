@@ -36,7 +36,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $diff = $validator->compare($givenSignature, $wishedSignature);
 
-        $this->assertInstanceOf(Diff::class, $diff);
+        $this->assertInstanceOf(Diff::classname, $diff);
         $this->assertTrue($diff->isIdentical());
     }
 
@@ -54,7 +54,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $diff = $validator->compare($givenSignature, $wishedSignature);
 
-        $this->assertInstanceOf(Diff::class, $diff);
+        $this->assertInstanceOf(Diff::classname, $diff);
         $this->assertFalse($diff->isIdentical());
         $this->assertCount(1, $diff->getMissingParameters());
         $this->assertCount(1, $diff->getAdditionalParameters());
@@ -74,7 +74,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $diff = $validator->compare($givenSignature, $wishedSignature);
 
-        $this->assertInstanceOf(Diff::class, $diff);
+        $this->assertInstanceOf(Diff::classname, $diff);
         $this->assertFalse($diff->isIdentical());
         $this->assertCount(1, $diff->getMissingParameters());
         $this->assertCount(0, $diff->getAdditionalParameters());
@@ -94,7 +94,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $diff = $validator->compare($givenSignature, $wishedSignature);
 
-        $this->assertInstanceOf(Diff::class, $diff);
+        $this->assertInstanceOf(Diff::classname, $diff);
         $this->assertFalse($diff->isIdentical());
         $this->assertCount(0, $diff->getMissingParameters());
         $this->assertCount(2, $diff->getAdditionalParameters());
