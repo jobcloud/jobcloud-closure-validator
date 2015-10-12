@@ -37,21 +37,28 @@ class Validator
         $givenParameters = $givenSignature->getParameters();
         $whishedParameters = $whishedSignature->getParameters();
 
-        $missingParameters = array();
-        foreach ($whishedParameters as $i => $whishedParameter) {
-            if (!isset($givenParameters[$i]) || $whishedParameter != $givenParameters[$i]) {
-                $missingParameters[] = $whishedParameter;
-            }
-        }
-
-        $additionalParameters = array();
-        foreach ($givenParameters as $i => $givenParameter) {
-            if (!isset($whishedParameters[$i]) || $givenParameter != $whishedParameters[$i]) {
-                $additionalParameters[] = $givenParameter;
-            }
-        }
+        $missingParameters = $this->getDiffrentParameter($whishedParameters, $givenParameters);
+        $additionalParameters = $this->getDiffrentParameter($givenParameters, $whishedParameters);
 
         return new Diff($missingParameters, $additionalParameters);
+    }
+
+    /**
+     * @param array $parameters1
+     * @param array $parameters2
+     *
+     * @return array
+     */
+    protected function getDiffrentParameter(array $parameters1, array $parameters2)
+    {
+        $diffrentParameters = array();
+        foreach ($parameters1 as $i => $parameter1) {
+            if (!isset($parameters2[$i]) || $parameter1 != $parameters2[$i]) {
+                $diffrentParameters[] = $parameter1;
+            }
+        }
+
+        return $diffrentParameters;
     }
 
     /**
