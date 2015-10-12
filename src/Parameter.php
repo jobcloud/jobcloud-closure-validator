@@ -4,6 +4,8 @@ namespace Jobcloud\ClosureValidator;
 
 class Parameter
 {
+    const classname = __CLASS__;
+
     /**
      * @var string
      */

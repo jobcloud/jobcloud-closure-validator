@@ -4,6 +4,8 @@ namespace Jobcloud\ClosureValidator;
 
 class Signature
 {
+    const classname = __CLASS__;
+
     /**
      * @var Parameter[]|array
      */

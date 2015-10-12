@@ -16,7 +16,7 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
 
     public function testWithParameter()
     {
-        $parameter = new Parameter('parameter', Parameter::class);
+        $parameter = new Parameter('parameter', Parameter::classname);
         $signature = new Signature(array($parameter));
 
         $parameters = $signature->getParameters();

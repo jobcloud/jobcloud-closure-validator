@@ -4,6 +4,8 @@ namespace Jobcloud\ClosureValidator;
 
 class Validator
 {
+    const classname = __CLASS__;
+
     /**
      * @param \Closure $closure
      *

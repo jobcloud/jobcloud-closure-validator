@@ -4,6 +4,8 @@ namespace Jobcloud\ClosureValidator;
 
 class Diff
 {
+    const classname = __CLASS__;
+
     /**
      * @var Parameter[]|array
      */

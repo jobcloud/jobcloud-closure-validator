@@ -19,7 +19,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $signature = $validator->getSignatureFromClosure($closure);
 
-        $this->assertEquals(new Signature(array(new Parameter('parameter', Parameter::class))), $signature);
+        $this->assertEquals(new Signature(array(new Parameter('parameter', Parameter::classname))), $signature);
     }
 
     public function testCompare()
@@ -32,7 +32,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::class)));
+        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::classname)));
 
         $diff = $validator->compare($givenSignature, $wishedSignature);
 
@@ -50,7 +50,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::class)));
+        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::classname)));
 
         $diff = $validator->compare($givenSignature, $wishedSignature);
 
@@ -70,7 +70,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::class)));
+        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::classname)));
 
         $diff = $validator->compare($givenSignature, $wishedSignature);
 
@@ -90,7 +90,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::class)));
+        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::classname)));
 
         $diff = $validator->compare($givenSignature, $wishedSignature);
 

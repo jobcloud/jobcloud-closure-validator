@@ -16,9 +16,9 @@ class ParameterTest extends \PHPUnit_Framework_TestCase
 
     public function testWithType()
     {
-        $parameter = new Parameter('parameter', Parameter::class);
+        $parameter = new Parameter('parameter', Parameter::classname);
 
         $this->assertEquals('parameter', $parameter->getName());
-        $this->assertEquals(Parameter::class, $parameter->getType());
+        $this->assertEquals(Parameter::classname, $parameter->getType());
     }
 }
