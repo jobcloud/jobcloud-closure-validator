@@ -21,6 +21,7 @@ Through [Composer](http://getcomposer.org) as [jobcloud/jobcloud-closure-validat
 
 ```{.php}
 use Jobcloud\ClosureValidator\Parameter;
+use Jobcloud\ClosureValidator\Signature;
 use Jobcloud\ClosureValidator\Validator;
 
 $closure = function($param1, $param2) {};
