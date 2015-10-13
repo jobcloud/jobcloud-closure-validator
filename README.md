@@ -30,12 +30,12 @@ $validator = new Validator;
 
 $givenSignature = $validator->getSignatureFromClosure($closure);
 
-$whishedSignature = new Signature(array(
+$wishedSignature = new Signature(array(
     new Parameter('param1'),
     new Parameter('param2')
 );
 
-$diff = $validator->compare($givenSignature, $whishedSignature);
+$diff = $validator->compare($givenSignature, $wishedSignature);
 
 if (!$diff->isIdentical()) {
     throw new \Exception('Invalid closure signature');

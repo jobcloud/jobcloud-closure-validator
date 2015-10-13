@@ -28,17 +28,17 @@ class Validator
 
     /**
      * @param Signature $givenSignature
-     * @param Signature $whishedSignature
+     * @param Signature $wishedSignature
      *
      * @return Diff
      */
-    public function compare(Signature $givenSignature, Signature $whishedSignature)
+    public function compare(Signature $givenSignature, Signature $wishedSignature)
     {
         $givenParameters = $givenSignature->getParameters();
-        $whishedParameters = $whishedSignature->getParameters();
+        $wishedParameters = $wishedSignature->getParameters();
 
-        $missingParameters = $this->getDiffrentParameter($whishedParameters, $givenParameters);
-        $additionalParameters = $this->getDiffrentParameter($givenParameters, $whishedParameters);
+        $missingParameters = $this->getDiffrentParameter($wishedParameters, $givenParameters);
+        $additionalParameters = $this->getDiffrentParameter($givenParameters, $wishedParameters);
 
         return new Diff($missingParameters, $additionalParameters);
     }
