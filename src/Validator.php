@@ -44,6 +44,22 @@ class Validator
     }
 
     /**
+     * @param Signature $givenSignature
+     * @param Signature $wishedSignature
+     *
+     * @throws InvalidClosureException
+     */
+    public function validOrException(Signature $givenSignature, Signature $wishedSignature)
+    {
+        $diff = $this->compare($givenSignature, $wishedSignature);
+        if ($diff->isIdentical()) {
+            return;
+        }
+
+        throw new InvalidClosureException(sprintf('Invalid closure: %s', json_encode($diff->toArray())));
+    }
+
+    /**
      * @param array $parameters1
      * @param array $parameters2
      *

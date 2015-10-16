@@ -12,6 +12,7 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
         $signature = new Signature();
 
         $this->assertCount(0, $signature->getParameters());
+        $this->assertEquals(array('parameters' => array()), $signature->toArray());
     }
 
     public function testWithParameter()
@@ -23,5 +24,12 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(1, $parameters);
         $this->assertEquals($parameter, $parameters[0]);
+        $this->assertEquals(
+            array(
+                'parameters' => array(
+                    $parameter->toArray(),
+                ),
+            ), $signature->toArray()
+        );
     }
 }

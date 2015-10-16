@@ -13,7 +13,12 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $useParameter = 'test';
 
-        $closure = function (Parameter $parameter) use ($useParameter) { return $useParameter; };
+        $closure = function (Parameter $parameter) use ($useParameter) {
+            return array(
+                'parameter' => $parameter,
+                'useParameter' => $useParameter,
+            );
+        };
 
         $validator = new Validator();
 
@@ -26,7 +31,12 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $useParameter = 'test';
 
-        $closure = function (Parameter $parameter) use ($useParameter) { return $useParameter; };
+        $closure = function (Parameter $parameter) use ($useParameter) {
+            return array(
+                'parameter' => $parameter,
+                'useParameter' => $useParameter,
+            );
+        };
 
         $validator = new Validator();
 
@@ -44,7 +54,12 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $useParameter = 'test';
 
-        $closure = function (Parameter $parameter) use ($useParameter) { return $useParameter; };
+        $closure = function (Parameter $parameter) use ($useParameter) {
+            return array(
+                'parameter' => $parameter,
+                'useParameter' => $useParameter,
+            );
+        };
 
         $validator = new Validator();
 
@@ -84,7 +99,14 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $useParameter = 'test';
 
-        $closure = function (Parameter $parameter1, array $parameter2, $parameter3) use ($useParameter) { return $useParameter; };
+        $closure = function (Parameter $parameter1, array $parameter2, $parameter3) use ($useParameter) {
+            return array(
+                'parameter1' => $parameter1,
+                'parameter2' => $parameter2,
+                'parameter3' => $parameter3,
+                'useParameter' => $useParameter,
+            );
+        };
 
         $validator = new Validator();
 
@@ -98,5 +120,104 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($diff->isIdentical());
         $this->assertCount(0, $diff->getMissingParameters());
         $this->assertCount(2, $diff->getAdditionalParameters());
+    }
+
+    public function testValidOrException()
+    {
+        $useParameter = 'test';
+
+        $closure = function (Parameter $parameter) use ($useParameter) {
+            return array(
+                'parameter' => $parameter,
+                'useParameter' => $useParameter,
+            );
+        };
+
+        $validator = new Validator();
+
+        $givenSignature = $validator->getSignatureFromClosure($closure);
+
+        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::classname)));
+
+        $validator->validOrException($givenSignature, $wishedSignature);
+    }
+
+    /**
+     * @expectedException \Jobcloud\ClosureValidator\InvalidClosureException
+     * @expectedExceptionMessage Invalid closure: {"missingParameters":[{"name":"parameter1","type":"Jobcloud\\ClosureValidator\\Parameter"}],"additionalParameters":[{"name":"parameter","type":"Jobcloud\\ClosureValidator\\Parameter"}]}
+     *
+     * @throws \Jobcloud\ClosureValidator\InvalidClosureException
+     */
+    public function testValidOrExceptionWithDiffrentParamerter()
+    {
+        $useParameter = 'test';
+
+        $closure = function (Parameter $parameter) use ($useParameter) {
+            return array(
+                'parameter' => $parameter,
+                'useParameter' => $useParameter,
+            );
+        };
+
+        $validator = new Validator();
+
+        $givenSignature = $validator->getSignatureFromClosure($closure);
+
+        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::classname)));
+
+        $validator->validOrException($givenSignature, $wishedSignature);
+    }
+
+    /**
+     * @expectedException \Jobcloud\ClosureValidator\InvalidClosureException
+     * @expectedExceptionMessage Invalid closure: {"missingParameters":[{"name":"parameter","type":"Jobcloud\\ClosureValidator\\Parameter"}],"additionalParameters":[]}
+     *
+     * @throws \Jobcloud\ClosureValidator\InvalidClosureException
+     */
+    public function testValidOrExceptionWithMissingParamerter()
+    {
+        $useParameter = 'test';
+
+        $closure = function () use ($useParameter) {
+            return array(
+                'useParameter' => $useParameter,
+            );
+        };
+
+        $validator = new Validator();
+
+        $givenSignature = $validator->getSignatureFromClosure($closure);
+
+        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::classname)));
+
+        $validator->validOrException($givenSignature, $wishedSignature);
+    }
+
+    /**
+     * @expectedException \Jobcloud\ClosureValidator\InvalidClosureException
+     * @expectedExceptionMessage Invalid closure: {"missingParameters":[],"additionalParameters":[{"name":"parameter2","type":"array"},{"name":"parameter3","type":null}]}
+     *
+     * @throws \Jobcloud\ClosureValidator\InvalidClosureException
+     */
+    public function testValidOrExceptionWithAdditionalParamerter()
+    {
+        $useParameter = 'test';
+
+        $closure = function (Parameter $parameter1, array $parameter2, $parameter3) use ($useParameter) {
+            return array(
+                'parameter1' => $parameter1,
+                'parameter2' => $parameter2,
+                'parameter3' => $parameter3,
+                'useParameter' => $useParameter,
+            );
+        };
+
+        $validator = new Validator();
+
+        $givenSignature = $validator->getSignatureFromClosure($closure);
+
+        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::classname)));
+
+        $validator->validOrException($givenSignature, $wishedSignature);
     }
 }

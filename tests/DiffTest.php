@@ -12,6 +12,12 @@ class DiffTest extends \PHPUnit_Framework_TestCase
         $diff = new Diff();
 
         $this->assertTrue($diff->isIdentical());
+        $this->assertEquals(
+            array(
+                'missingParameters' => array(),
+                'additionalParameters' => array(),
+            ), $diff->toArray()
+        );
     }
 
     public function testMissingParameter()
@@ -24,6 +30,14 @@ class DiffTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($diff->isIdentical());
         $this->assertSame($parameter, $missingParameters[0]);
+        $this->assertEquals(
+            array(
+                'missingParameters' => array(
+                    $parameter->toArray(),
+                ),
+                'additionalParameters' => array(),
+            ), $diff->toArray()
+        );
     }
 
     public function testAdditionalParameter()
@@ -36,5 +50,13 @@ class DiffTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($diff->isIdentical());
         $this->assertSame($parameter, $additionalParameters[0]);
+        $this->assertEquals(
+            array(
+                'missingParameters' => array(),
+                'additionalParameters' => array(
+                    $parameter->toArray(),
+                ),
+            ), $diff->toArray()
+        );
     }
 }

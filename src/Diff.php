@@ -2,7 +2,7 @@
 
 namespace Jobcloud\ClosureValidator;
 
-class Diff
+class Diff implements ToArrayInterface
 {
     const classname = __CLASS__;
 
@@ -29,6 +29,32 @@ class Diff
         foreach ($additionalParameters as $additionalParameter) {
             $this->addAdditionalParameter($additionalParameter);
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return array(
+            'missingParameters' => $this->getParametersAsArray($this->missingParameters),
+            'additionalParameters' => $this->getParametersAsArray($this->additionalParameters),
+        );
+    }
+
+    /**
+     * @param Parameter[]|array $parameters
+     *
+     * @return array
+     */
+    protected function getParametersAsArray(array $parameters)
+    {
+        $parametersAsArray = array();
+        foreach ($parameters as $parameter) {
+            $parametersAsArray[] = $parameter->toArray();
+        }
+
+        return $parametersAsArray;
     }
 
     /**
