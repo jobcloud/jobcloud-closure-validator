@@ -19,6 +19,8 @@ Through [Composer](http://getcomposer.org) as [jobcloud/jobcloud-closure-validat
 
 ## Usage
 
+### Prepare
+
 ```{.php}
 use Jobcloud\ClosureValidator\Parameter;
 use Jobcloud\ClosureValidator\Signature;
@@ -40,6 +42,22 @@ $diff = $validator->compare($givenSignature, $wishedSignature);
 if (!$diff->isIdentical()) {
     throw new \Exception('Invalid closure signature');
 }
+```
+
+### Diff
+
+```{.php}
+$diff = $validator->compare($givenSignature, $wishedSignature);
+
+if (!$diff->isIdentical()) {
+    throw new \Exception('Invalid closure signature');
+}
+```
+
+### Valid or exception
+
+```{.php}
+$validator->validOrException($givenSignature, $wishedSignature);
 ```
 
 [1]: https://packagist.org/packages/jobcloud/jobcloud-closure-validator
