@@ -4,7 +4,11 @@ namespace Jobcloud\ClosureValidator;
 
 class Signature implements ToArrayInterface
 {
-    const classname = __CLASS__;
+
+    /**
+     * @var string
+     */
+    const CLASS_NAME = __CLASS__;
 
     /**
      * @var Parameter[]|array
@@ -32,7 +36,7 @@ class Signature implements ToArrayInterface
         }
 
         return array(
-            'parameters' => $parameters,
+            'parameters' => $parameters
         );
     }
 

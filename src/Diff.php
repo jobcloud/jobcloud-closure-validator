@@ -4,7 +4,11 @@ namespace Jobcloud\ClosureValidator;
 
 class Diff implements ToArrayInterface
 {
-    const classname = __CLASS__;
+
+    /**
+     * @var string
+     */
+    const CLASS_NAME = __CLASS__;
 
     /**
      * @var Parameter[]|array
@@ -38,7 +42,7 @@ class Diff implements ToArrayInterface
     {
         return array(
             'missingParameters' => $this->getParametersAsArray($this->missingParameters),
-            'additionalParameters' => $this->getParametersAsArray($this->additionalParameters),
+            'additionalParameters' => $this->getParametersAsArray($this->additionalParameters)
         );
     }
 
@@ -90,7 +94,7 @@ class Diff implements ToArrayInterface
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isIdentical()
     {

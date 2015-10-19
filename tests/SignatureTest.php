@@ -17,7 +17,7 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
 
     public function testWithParameter()
     {
-        $parameter = new Parameter('parameter', Parameter::classname);
+        $parameter = new Parameter('parameter', Parameter::CLASS_NAME);
         $signature = new Signature(array($parameter));
 
         $parameters = $signature->getParameters();
@@ -27,9 +27,10 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             array(
                 'parameters' => array(
-                    $parameter->toArray(),
-                ),
-            ), $signature->toArray()
+                    $parameter->toArray()
+                )
+            ),
+            $signature->toArray()
         );
     }
 }

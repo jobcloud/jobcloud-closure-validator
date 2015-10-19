@@ -15,22 +15,24 @@ class ParameterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             array(
                 'name' => 'parameter',
-                'type' => null,
-            ), $parameter->toArray()
+                'type' => null
+            ),
+            $parameter->toArray()
         );
     }
 
     public function testWithType()
     {
-        $parameter = new Parameter('parameter', Parameter::classname);
+        $parameter = new Parameter('parameter', Parameter::CLASS_NAME);
 
         $this->assertEquals('parameter', $parameter->getName());
-        $this->assertEquals(Parameter::classname, $parameter->getType());
+        $this->assertEquals(Parameter::CLASS_NAME, $parameter->getType());
         $this->assertEquals(
             array(
                 'name' => 'parameter',
-                'type' => Parameter::classname,
-            ), $parameter->toArray()
+                'type' => Parameter::CLASS_NAME
+            ),
+            $parameter->toArray()
         );
     }
 }

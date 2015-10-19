@@ -4,7 +4,11 @@ namespace Jobcloud\ClosureValidator;
 
 class Parameter implements ToArrayInterface
 {
-    const classname = __CLASS__;
+
+    /**
+     * @var string
+     */
+    const CLASS_NAME = __CLASS__;
 
     /**
      * @var string
@@ -33,7 +37,7 @@ class Parameter implements ToArrayInterface
     {
         return array(
             'name' => $this->getName(),
-            'type' => $this->getType(),
+            'type' => $this->getType()
         );
     }
 

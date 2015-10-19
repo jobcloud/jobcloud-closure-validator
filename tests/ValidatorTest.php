@@ -16,7 +16,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $closure = function (Parameter $parameter) use ($useParameter) {
             return array(
                 'parameter' => $parameter,
-                'useParameter' => $useParameter,
+                'useParameter' => $useParameter
             );
         };
 
@@ -24,7 +24,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $signature = $validator->getSignatureFromClosure($closure);
 
-        $this->assertEquals(new Signature(array(new Parameter('parameter', Parameter::classname))), $signature);
+        $this->assertEquals(new Signature(array(new Parameter('parameter', Parameter::CLASS_NAME))), $signature);
     }
 
     public function testCompare()
@@ -34,7 +34,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $closure = function (Parameter $parameter) use ($useParameter) {
             return array(
                 'parameter' => $parameter,
-                'useParameter' => $useParameter,
+                'useParameter' => $useParameter
             );
         };
 
@@ -42,22 +42,22 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::classname)));
+        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::CLASS_NAME)));
 
         $diff = $validator->compare($givenSignature, $wishedSignature);
 
-        $this->assertInstanceOf(Diff::classname, $diff);
+        $this->assertInstanceOf(Diff::CLASS_NAME, $diff);
         $this->assertTrue($diff->isIdentical());
     }
 
-    public function testCompareWithDiffrentParamerter()
+    public function testCompareWithDifferentParameter()
     {
         $useParameter = 'test';
 
         $closure = function (Parameter $parameter) use ($useParameter) {
             return array(
                 'parameter' => $parameter,
-                'useParameter' => $useParameter,
+                'useParameter' => $useParameter
             );
         };
 
@@ -65,37 +65,39 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::classname)));
+        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::CLASS_NAME)));
 
         $diff = $validator->compare($givenSignature, $wishedSignature);
 
-        $this->assertInstanceOf(Diff::classname, $diff);
+        $this->assertInstanceOf(Diff::CLASS_NAME, $diff);
         $this->assertFalse($diff->isIdentical());
         $this->assertCount(1, $diff->getMissingParameters());
         $this->assertCount(1, $diff->getAdditionalParameters());
     }
 
-    public function testCompareWithMissingParamerter()
+    public function testCompareWithMissingParameter()
     {
         $useParameter = 'test';
 
-        $closure = function () use ($useParameter) { return $useParameter; };
+        $closure = function () use ($useParameter) {
+            return $useParameter;
+        };
 
         $validator = new Validator();
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::classname)));
+        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::CLASS_NAME)));
 
         $diff = $validator->compare($givenSignature, $wishedSignature);
 
-        $this->assertInstanceOf(Diff::classname, $diff);
+        $this->assertInstanceOf(Diff::CLASS_NAME, $diff);
         $this->assertFalse($diff->isIdentical());
         $this->assertCount(1, $diff->getMissingParameters());
         $this->assertCount(0, $diff->getAdditionalParameters());
     }
 
-    public function testCompareWithAdditionalParamerter()
+    public function testCompareWithAdditionalParameter()
     {
         $useParameter = 'test';
 
@@ -104,7 +106,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
                 'parameter1' => $parameter1,
                 'parameter2' => $parameter2,
                 'parameter3' => $parameter3,
-                'useParameter' => $useParameter,
+                'useParameter' => $useParameter
             );
         };
 
@@ -112,11 +114,11 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::classname)));
+        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::CLASS_NAME)));
 
         $diff = $validator->compare($givenSignature, $wishedSignature);
 
-        $this->assertInstanceOf(Diff::classname, $diff);
+        $this->assertInstanceOf(Diff::CLASS_NAME, $diff);
         $this->assertFalse($diff->isIdentical());
         $this->assertCount(0, $diff->getMissingParameters());
         $this->assertCount(2, $diff->getAdditionalParameters());
@@ -129,7 +131,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $closure = function (Parameter $parameter) use ($useParameter) {
             return array(
                 'parameter' => $parameter,
-                'useParameter' => $useParameter,
+                'useParameter' => $useParameter
             );
         };
 
@@ -137,7 +139,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::classname)));
+        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::CLASS_NAME)));
 
         $validator->validOrException($givenSignature, $wishedSignature);
     }
@@ -148,14 +150,14 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      *
      * @throws \Jobcloud\ClosureValidator\InvalidClosureException
      */
-    public function testValidOrExceptionWithDiffrentParamerter()
+    public function testValidOrExceptionWithDifferentParameter()
     {
         $useParameter = 'test';
 
         $closure = function (Parameter $parameter) use ($useParameter) {
             return array(
                 'parameter' => $parameter,
-                'useParameter' => $useParameter,
+                'useParameter' => $useParameter
             );
         };
 
@@ -163,7 +165,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::classname)));
+        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::CLASS_NAME)));
 
         $validator->validOrException($givenSignature, $wishedSignature);
     }
@@ -174,13 +176,13 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      *
      * @throws \Jobcloud\ClosureValidator\InvalidClosureException
      */
-    public function testValidOrExceptionWithMissingParamerter()
+    public function testValidOrExceptionWithMissingParameter()
     {
         $useParameter = 'test';
 
         $closure = function () use ($useParameter) {
             return array(
-                'useParameter' => $useParameter,
+                'useParameter' => $useParameter
             );
         };
 
@@ -188,7 +190,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::classname)));
+        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::CLASS_NAME)));
 
         $validator->validOrException($givenSignature, $wishedSignature);
     }
@@ -199,7 +201,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      *
      * @throws \Jobcloud\ClosureValidator\InvalidClosureException
      */
-    public function testValidOrExceptionWithAdditionalParamerter()
+    public function testValidOrExceptionWithAdditionalParameter()
     {
         $useParameter = 'test';
 
@@ -208,7 +210,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
                 'parameter1' => $parameter1,
                 'parameter2' => $parameter2,
                 'parameter3' => $parameter3,
-                'useParameter' => $useParameter,
+                'useParameter' => $useParameter
             );
         };
 
@@ -216,7 +218,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::classname)));
+        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::CLASS_NAME)));
 
         $validator->validOrException($givenSignature, $wishedSignature);
     }

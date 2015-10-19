@@ -4,7 +4,11 @@ namespace Jobcloud\ClosureValidator;
 
 class Validator
 {
-    const classname = __CLASS__;
+
+    /**
+     * @var string
+     */
+    const CLASS_NAME = __CLASS__;
 
     /**
      * @param \Closure $closure
@@ -37,8 +41,8 @@ class Validator
         $givenParameters = $givenSignature->getParameters();
         $wishedParameters = $wishedSignature->getParameters();
 
-        $missingParameters = $this->getDiffrentParameter($wishedParameters, $givenParameters);
-        $additionalParameters = $this->getDiffrentParameter($givenParameters, $wishedParameters);
+        $missingParameters = $this->getDifferentParameter($wishedParameters, $givenParameters);
+        $additionalParameters = $this->getDifferentParameter($givenParameters, $wishedParameters);
 
         return new Diff($missingParameters, $additionalParameters);
     }
@@ -52,11 +56,9 @@ class Validator
     public function validOrException(Signature $givenSignature, Signature $wishedSignature)
     {
         $diff = $this->compare($givenSignature, $wishedSignature);
-        if ($diff->isIdentical()) {
-            return;
+        if (!$diff->isIdentical()) {
+            throw new InvalidClosureException(sprintf('Invalid closure: %s', json_encode($diff->toArray())));
         }
-
-        throw new InvalidClosureException(sprintf('Invalid closure: %s', json_encode($diff->toArray())));
     }
 
     /**
@@ -65,16 +67,16 @@ class Validator
      *
      * @return array
      */
-    protected function getDiffrentParameter(array $parameters1, array $parameters2)
+    protected function getDifferentParameter(array $parameters1, array $parameters2)
     {
-        $diffrentParameters = array();
+        $differentParameters = array();
         foreach ($parameters1 as $i => $parameter1) {
             if (!isset($parameters2[$i]) || $parameter1 != $parameters2[$i]) {
-                $diffrentParameters[] = $parameter1;
+                $differentParameters[] = $parameter1;
             }
         }
 
-        return $diffrentParameters;
+        return $differentParameters;
     }
 
     /**
@@ -92,6 +94,6 @@ class Validator
             return 'array';
         }
 
-        return;
+        return null;
     }
 }

@@ -4,5 +4,9 @@ namespace Jobcloud\ClosureValidator;
 
 class InvalidClosureException extends \Exception
 {
-    const classname = __CLASS__;
+
+    /**
+     * @var string
+     */
+    const CLASS_NAME = __CLASS__;
 }
