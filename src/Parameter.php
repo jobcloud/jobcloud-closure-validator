@@ -24,7 +24,7 @@ class Parameter implements ToArrayInterface
      * @param string      $name
      * @param string|null $type
      */
-    public function __construct($name, $type = null)
+    public function __construct(string $name, $type = null)
     {
         $this->name = $name;
         $this->type = $type;

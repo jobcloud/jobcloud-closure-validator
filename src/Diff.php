@@ -63,6 +63,7 @@ class Diff implements ToArrayInterface
 
     /**
      * @param Parameter $parameter
+     * @return void
      */
     protected function addMissingParameter(Parameter $parameter)
     {
@@ -71,6 +72,7 @@ class Diff implements ToArrayInterface
 
     /**
      * @param Parameter $parameter
+     * @return void
      */
     protected function addAdditionalParameter(Parameter $parameter)
     {
