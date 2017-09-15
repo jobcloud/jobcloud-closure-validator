@@ -42,6 +42,7 @@ class Signature implements ToArrayInterface
 
     /**
      * @param Parameter $parameter
+     * @return void
      */
     protected function addParameter(Parameter $parameter)
     {

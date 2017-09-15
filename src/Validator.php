@@ -50,6 +50,7 @@ class Validator
     /**
      * @param Signature $givenSignature
      * @param Signature $wishedSignature
+     * @return void
      *
      * @throws InvalidClosureException
      */
