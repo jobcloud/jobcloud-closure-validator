@@ -4,8 +4,9 @@ namespace Jobcloud\Tests\ClosureValidator;
 
 use Jobcloud\ClosureValidator\Parameter;
 use Jobcloud\ClosureValidator\Signature;
+use PHPUnit\Framework\TestCase;
 
-class SignatureTest extends \PHPUnit_Framework_TestCase
+class SignatureTest extends TestCase
 {
     public function testWithoutParameter()
     {

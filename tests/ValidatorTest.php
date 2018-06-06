@@ -6,8 +6,9 @@ use Jobcloud\ClosureValidator\Diff;
 use Jobcloud\ClosureValidator\Parameter;
 use Jobcloud\ClosureValidator\Signature;
 use Jobcloud\ClosureValidator\Validator;
+use PHPUnit\Framework\TestCase;
 
-class ValidatorTest extends \PHPUnit_Framework_TestCase
+class ValidatorTest extends TestCase
 {
     public function testGetSignatureFromClosure()
     {
@@ -124,6 +125,10 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(2, $diff->getAdditionalParameters());
     }
 
+    /**
+     * @return void
+     * @doesNotPerformAssertions
+     */
     public function testValidOrException()
     {
         $useParameter = 'test';

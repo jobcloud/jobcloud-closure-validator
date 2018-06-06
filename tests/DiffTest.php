@@ -4,8 +4,9 @@ namespace Jobcloud\Tests\ClosureValidator;
 
 use Jobcloud\ClosureValidator\Diff;
 use Jobcloud\ClosureValidator\Parameter;
+use PHPUnit\Framework\TestCase;
 
-class DiffTest extends \PHPUnit_Framework_TestCase
+class DiffTest extends TestCase
 {
     public function testIdentical()
     {
