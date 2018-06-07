@@ -14,10 +14,10 @@ class ParameterTest extends TestCase
         $this->assertEquals('parameter', $parameter->getName());
         $this->assertNull($parameter->getType());
         $this->assertEquals(
-            array(
+            [
                 'name' => 'parameter',
                 'type' => null
-            ),
+            ],
             $parameter->toArray()
         );
     }
@@ -29,10 +29,10 @@ class ParameterTest extends TestCase
         $this->assertEquals('parameter', $parameter->getName());
         $this->assertEquals(Parameter::CLASS_NAME, $parameter->getType());
         $this->assertEquals(
-            array(
+            [
                 'name' => 'parameter',
                 'type' => Parameter::CLASS_NAME
-            ),
+            ],
             $parameter->toArray()
         );
     }

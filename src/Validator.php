@@ -17,7 +17,7 @@ class Validator
      */
     public function getSignatureFromClosure(\Closure $closure)
     {
-        $parameters = array();
+        $parameters = [];
 
         $reflectionFunction = new \ReflectionFunction($closure);
         foreach ($reflectionFunction->getParameters() as $reflectionParameter) {
@@ -70,7 +70,7 @@ class Validator
      */
     protected function getDifferentParameter(array $parameters1, array $parameters2)
     {
-        $differentParameters = array();
+        $differentParameters = [];
         foreach ($parameters1 as $i => $parameter1) {
             if (!isset($parameters2[$i]) || $parameter1 != $parameters2[$i]) {
                 $differentParameters[] = $parameter1;

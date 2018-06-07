@@ -13,18 +13,18 @@ class Diff implements ToArrayInterface
     /**
      * @var Parameter[]|array
      */
-    protected $missingParameters = array();
+    protected $missingParameters = [];
 
     /**
      * @var Parameter[]|array
      */
-    protected $additionalParameters = array();
+    protected $additionalParameters = [];
 
     /**
      * @param Parameter[]|array $missingParameters
      * @param Parameter[]|array $additionalParameters
      */
-    public function __construct(array $missingParameters = array(), array $additionalParameters = array())
+    public function __construct(array $missingParameters = [], array $additionalParameters = [])
     {
         foreach ($missingParameters as $missingParameter) {
             $this->addMissingParameter($missingParameter);
@@ -40,10 +40,10 @@ class Diff implements ToArrayInterface
      */
     public function toArray()
     {
-        return array(
+        return [
             'missingParameters' => $this->getParametersAsArray($this->missingParameters),
             'additionalParameters' => $this->getParametersAsArray($this->additionalParameters)
-        );
+        ];
     }
 
     /**
@@ -53,7 +53,7 @@ class Diff implements ToArrayInterface
      */
     protected function getParametersAsArray(array $parameters)
     {
-        $parametersAsArray = array();
+        $parametersAsArray = [];
         foreach ($parameters as $parameter) {
             $parametersAsArray[] = $parameter->toArray();
         }

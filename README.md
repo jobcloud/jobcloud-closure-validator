@@ -11,7 +11,7 @@ A simple validator to check closure signatures.
 
 ## Requirements
 
-PHP ~5.3
+PHP ~7.0
 
 ## Installation
 
@@ -32,9 +32,11 @@ $validator = new Validator;
 
 $givenSignature = $validator->getSignatureFromClosure($closure);
 
-$wishedSignature = new Signature(array(
-    new Parameter('param1'),
-    new Parameter('param2')
+$wishedSignature = new Signature(
+    [
+        new Parameter('param1'),
+        new Parameter('param2')
+    ]
 );
 ```
 

@@ -35,10 +35,10 @@ class Parameter implements ToArrayInterface
      */
     public function toArray()
     {
-        return array(
+        return [
             'name' => $this->getName(),
             'type' => $this->getType()
-        );
+        ];
     }
 
     /**

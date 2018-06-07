@@ -15,17 +15,17 @@ class ValidatorTest extends TestCase
         $useParameter = 'test';
 
         $closure = function (Parameter $parameter) use ($useParameter) {
-            return array(
+            return [
                 'parameter' => $parameter,
                 'useParameter' => $useParameter
-            );
+            ];
         };
 
         $validator = new Validator();
 
         $signature = $validator->getSignatureFromClosure($closure);
 
-        $this->assertEquals(new Signature(array(new Parameter('parameter', Parameter::CLASS_NAME))), $signature);
+        $this->assertEquals(new Signature([new Parameter('parameter', Parameter::CLASS_NAME)]), $signature);
     }
 
     public function testCompare()
@@ -33,17 +33,17 @@ class ValidatorTest extends TestCase
         $useParameter = 'test';
 
         $closure = function (Parameter $parameter) use ($useParameter) {
-            return array(
+            return [
                 'parameter' => $parameter,
                 'useParameter' => $useParameter
-            );
+            ];
         };
 
         $validator = new Validator();
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::CLASS_NAME)));
+        $wishedSignature = new Signature([new Parameter('parameter', Parameter::CLASS_NAME)]);
 
         $diff = $validator->compare($givenSignature, $wishedSignature);
 
@@ -56,17 +56,17 @@ class ValidatorTest extends TestCase
         $useParameter = 'test';
 
         $closure = function (Parameter $parameter) use ($useParameter) {
-            return array(
+            return [
                 'parameter' => $parameter,
                 'useParameter' => $useParameter
-            );
+            ];
         };
 
         $validator = new Validator();
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::CLASS_NAME)));
+        $wishedSignature = new Signature([new Parameter('parameter1', Parameter::CLASS_NAME)]);
 
         $diff = $validator->compare($givenSignature, $wishedSignature);
 
@@ -88,7 +88,7 @@ class ValidatorTest extends TestCase
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::CLASS_NAME)));
+        $wishedSignature = new Signature([new Parameter('parameter', Parameter::CLASS_NAME)]);
 
         $diff = $validator->compare($givenSignature, $wishedSignature);
 
@@ -103,19 +103,19 @@ class ValidatorTest extends TestCase
         $useParameter = 'test';
 
         $closure = function (Parameter $parameter1, array $parameter2, $parameter3) use ($useParameter) {
-            return array(
+            return [
                 'parameter1' => $parameter1,
                 'parameter2' => $parameter2,
                 'parameter3' => $parameter3,
                 'useParameter' => $useParameter
-            );
+            ];
         };
 
         $validator = new Validator();
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::CLASS_NAME)));
+        $wishedSignature = new Signature([new Parameter('parameter1', Parameter::CLASS_NAME)]);
 
         $diff = $validator->compare($givenSignature, $wishedSignature);
 
@@ -134,17 +134,17 @@ class ValidatorTest extends TestCase
         $useParameter = 'test';
 
         $closure = function (Parameter $parameter) use ($useParameter) {
-            return array(
+            return [
                 'parameter' => $parameter,
                 'useParameter' => $useParameter
-            );
+            ];
         };
 
         $validator = new Validator();
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::CLASS_NAME)));
+        $wishedSignature = new Signature([new Parameter('parameter', Parameter::CLASS_NAME)]);
 
         $validator->validOrException($givenSignature, $wishedSignature);
     }
@@ -160,17 +160,17 @@ class ValidatorTest extends TestCase
         $useParameter = 'test';
 
         $closure = function (Parameter $parameter) use ($useParameter) {
-            return array(
+            return [
                 'parameter' => $parameter,
                 'useParameter' => $useParameter
-            );
+            ];
         };
 
         $validator = new Validator();
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::CLASS_NAME)));
+        $wishedSignature = new Signature([new Parameter('parameter1', Parameter::CLASS_NAME)]);
 
         $validator->validOrException($givenSignature, $wishedSignature);
     }
@@ -186,16 +186,16 @@ class ValidatorTest extends TestCase
         $useParameter = 'test';
 
         $closure = function () use ($useParameter) {
-            return array(
+            return [
                 'useParameter' => $useParameter
-            );
+            ];
         };
 
         $validator = new Validator();
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter', Parameter::CLASS_NAME)));
+        $wishedSignature = new Signature([new Parameter('parameter', Parameter::CLASS_NAME)]);
 
         $validator->validOrException($givenSignature, $wishedSignature);
     }
@@ -211,19 +211,19 @@ class ValidatorTest extends TestCase
         $useParameter = 'test';
 
         $closure = function (Parameter $parameter1, array $parameter2, $parameter3) use ($useParameter) {
-            return array(
+            return [
                 'parameter1' => $parameter1,
                 'parameter2' => $parameter2,
                 'parameter3' => $parameter3,
                 'useParameter' => $useParameter
-            );
+            ];
         };
 
         $validator = new Validator();
 
         $givenSignature = $validator->getSignatureFromClosure($closure);
 
-        $wishedSignature = new Signature(array(new Parameter('parameter1', Parameter::CLASS_NAME)));
+        $wishedSignature = new Signature([new Parameter('parameter1', Parameter::CLASS_NAME)]);
 
         $validator->validOrException($givenSignature, $wishedSignature);
     }

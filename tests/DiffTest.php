@@ -14,10 +14,10 @@ class DiffTest extends TestCase
 
         $this->assertTrue($diff->isIdentical());
         $this->assertEquals(
-            array(
-                'missingParameters' => array(),
-                'additionalParameters' => array()
-            ),
+            [
+                'missingParameters' => [],
+                'additionalParameters' => []
+            ],
             $diff->toArray()
         );
     }
@@ -26,19 +26,19 @@ class DiffTest extends TestCase
     {
         $parameter = new Parameter('parameter');
 
-        $diff = new Diff(array($parameter));
+        $diff = new Diff([$parameter]);
 
         $missingParameters = $diff->getMissingParameters();
 
         $this->assertFalse($diff->isIdentical());
         $this->assertSame($parameter, $missingParameters[0]);
         $this->assertEquals(
-            array(
-                'missingParameters' => array(
+            [
+                'missingParameters' => [
                     $parameter->toArray()
-                ),
-                'additionalParameters' => array()
-            ),
+                ],
+                'additionalParameters' => []
+            ],
             $diff->toArray()
         );
     }
@@ -47,19 +47,19 @@ class DiffTest extends TestCase
     {
         $parameter = new Parameter('parameter');
 
-        $diff = new Diff(array(), array($parameter));
+        $diff = new Diff([], [$parameter]);
 
         $additionalParameters = $diff->getAdditionalParameters();
 
         $this->assertFalse($diff->isIdentical());
         $this->assertSame($parameter, $additionalParameters[0]);
         $this->assertEquals(
-            array(
-                'missingParameters' => array(),
-                'additionalParameters' => array(
+            [
+                'missingParameters' => [],
+                'additionalParameters' => [
                     $parameter->toArray()
-                )
-            ),
+                ]
+            ],
             $diff->toArray()
         );
     }

@@ -13,12 +13,12 @@ class Signature implements ToArrayInterface
     /**
      * @var Parameter[]|array
      */
-    protected $parameters = array();
+    protected $parameters = [];
 
     /**
      * @param Parameter[]|array $parameters
      */
-    public function __construct(array $parameters = array())
+    public function __construct(array $parameters = [])
     {
         foreach ($parameters as $parameter) {
             $this->addParameter($parameter);
@@ -30,14 +30,14 @@ class Signature implements ToArrayInterface
      */
     public function toArray()
     {
-        $parameters = array();
+        $parameters = [];
         foreach ($this->parameters as $parameter) {
             $parameters[] = $parameter->toArray();
         }
 
-        return array(
+        return [
             'parameters' => $parameters
-        );
+        ];
     }
 
     /**
