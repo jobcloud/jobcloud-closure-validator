@@ -3,8 +3,9 @@
 namespace Jobcloud\Tests\ClosureValidator;
 
 use Jobcloud\ClosureValidator\Parameter;
+use PHPUnit\Framework\TestCase;
 
-class ParameterTest extends \PHPUnit_Framework_TestCase
+class ParameterTest extends TestCase
 {
     public function testWithoutType()
     {
@@ -13,10 +14,10 @@ class ParameterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('parameter', $parameter->getName());
         $this->assertNull($parameter->getType());
         $this->assertEquals(
-            array(
+            [
                 'name' => 'parameter',
                 'type' => null
-            ),
+            ],
             $parameter->toArray()
         );
     }
@@ -28,10 +29,10 @@ class ParameterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('parameter', $parameter->getName());
         $this->assertEquals(Parameter::CLASS_NAME, $parameter->getType());
         $this->assertEquals(
-            array(
+            [
                 'name' => 'parameter',
                 'type' => Parameter::CLASS_NAME
-            ),
+            ],
             $parameter->toArray()
         );
     }

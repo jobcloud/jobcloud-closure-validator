@@ -4,8 +4,9 @@ namespace Jobcloud\Tests\ClosureValidator;
 
 use Jobcloud\ClosureValidator\Diff;
 use Jobcloud\ClosureValidator\Parameter;
+use PHPUnit\Framework\TestCase;
 
-class DiffTest extends \PHPUnit_Framework_TestCase
+class DiffTest extends TestCase
 {
     public function testIdentical()
     {
@@ -13,10 +14,10 @@ class DiffTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($diff->isIdentical());
         $this->assertEquals(
-            array(
-                'missingParameters' => array(),
-                'additionalParameters' => array()
-            ),
+            [
+                'missingParameters' => [],
+                'additionalParameters' => []
+            ],
             $diff->toArray()
         );
     }
@@ -25,19 +26,19 @@ class DiffTest extends \PHPUnit_Framework_TestCase
     {
         $parameter = new Parameter('parameter');
 
-        $diff = new Diff(array($parameter));
+        $diff = new Diff([$parameter]);
 
         $missingParameters = $diff->getMissingParameters();
 
         $this->assertFalse($diff->isIdentical());
         $this->assertSame($parameter, $missingParameters[0]);
         $this->assertEquals(
-            array(
-                'missingParameters' => array(
+            [
+                'missingParameters' => [
                     $parameter->toArray()
-                ),
-                'additionalParameters' => array()
-            ),
+                ],
+                'additionalParameters' => []
+            ],
             $diff->toArray()
         );
     }
@@ -46,19 +47,19 @@ class DiffTest extends \PHPUnit_Framework_TestCase
     {
         $parameter = new Parameter('parameter');
 
-        $diff = new Diff(array(), array($parameter));
+        $diff = new Diff([], [$parameter]);
 
         $additionalParameters = $diff->getAdditionalParameters();
 
         $this->assertFalse($diff->isIdentical());
         $this->assertSame($parameter, $additionalParameters[0]);
         $this->assertEquals(
-            array(
-                'missingParameters' => array(),
-                'additionalParameters' => array(
+            [
+                'missingParameters' => [],
+                'additionalParameters' => [
                     $parameter->toArray()
-                )
-            ),
+                ]
+            ],
             $diff->toArray()
         );
     }
